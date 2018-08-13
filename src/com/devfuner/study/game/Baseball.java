@@ -1,5 +1,6 @@
 package com.devfuner.study.game;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Baseball {
@@ -10,50 +11,45 @@ public class Baseball {
         System.out.println("==================================");
         System.out.println();
 
-        int number1 = 3;
-        int number2 = 2;
-        int number3 = 6;
-        System.out.print("정답 > " + number1);
-        System.out.print(number2);
-        System.out.println(number3);
+        int[] numbers = {2, 3, 6};
+        System.out.println("정답 > " + Arrays.toString(numbers));
+
+        int[] guessNumbers = new int[3];
+
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("숫자를 입력하세요 > ");
-            int guessNumber1 = scanner.nextInt();
-            System.out.print("숫자를 입력하세요 > ");
-            int guessNumber2 = scanner.nextInt();
-            System.out.print("숫자를 입력하세요 > ");
-            int guessNumber3 = scanner.nextInt();
+            for (int i = 0; i < guessNumbers.length; i++) {
+                System.out.print("숫자를 입력하세요 > ");
+                guessNumbers[i] = scanner.nextInt();
+            }
+            System.out.println("입력한 숫자 : " + Arrays.toString(numbers));
 
-            System.out.println("입력한 숫자 : " + guessNumber1);
-            System.out.println("입력한 숫자 : " + guessNumber2);
-            System.out.println("입력한 숫자 : " + guessNumber3);
-
-            if (guessNumber1 == guessNumber2
-                    || guessNumber2 == guessNumber3
-                    || guessNumber1 == guessNumber3) {
+            if (guessNumbers[0] == guessNumbers[1]
+                    || guessNumbers[1] == guessNumbers[2]
+                    || guessNumbers[0] == guessNumbers[2]) {
                 System.out.println("같은 숫자를 입력하면 안되요~");
+                System.exit(0);
             }
 
             int strikeCount = 0;
             int ballCount = 0;
 
-            if (number1 == guessNumber1) {
+            if (numbers[0] == guessNumbers[0]) {
                 strikeCount = strikeCount + 1;
-            } else if (number2 == guessNumber1 || number3 == guessNumber1) {
+            } else if (numbers[1] == guessNumbers[0] || numbers[2] == guessNumbers[0]) {
                 ballCount = ballCount + 1;
             }
 
-            if (number2 == guessNumber2) {
+            if (numbers[1] == guessNumbers[1]) {
                 strikeCount = strikeCount + 1;
-            } else if (number1 == guessNumber2 || number3 == guessNumber2) {
+            } else if (numbers[0] == guessNumbers[1] || numbers[2] == guessNumbers[1]) {
                 ballCount = ballCount + 1;
             }
 
-            if (number3 == guessNumber3) {
+            if (numbers[2] == guessNumbers[2]) {
                 strikeCount = strikeCount + 1;
-            } else if (number1 == guessNumber3 || number2 == guessNumber3) {
+            } else if (numbers[0] == guessNumbers[2] || numbers[1] == guessNumbers[2]) {
                 ballCount = ballCount + 1;
             }
 
