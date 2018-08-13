@@ -1,7 +1,6 @@
 package com.devfuner.study.game;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Baseball {
 
@@ -11,39 +10,39 @@ public class Baseball {
         System.out.println("==================================");
         System.out.println();
 
-        int[] numbers = {2, 3, 6};
-        System.out.println("정답 > " + Arrays.toString(numbers));
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(6);
+        System.out.println("정답 > " + numbers);
 
-        int[] guessNumbers = new int[3];
+        List<Integer> guessNumbers = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            for (int i = 0; i < guessNumbers.length; i++) {
+            for (int i = 0; i < numbers.size(); i++) {
                 System.out.print("숫자를 입력하세요 > ");
-                guessNumbers[i] = scanner.nextInt();
+                guessNumbers.add(scanner.nextInt());
             }
-            System.out.println("입력한 숫자 : " + Arrays.toString(numbers));
+            System.out.println("입력한 숫자 : " + guessNumbers);
 
-            if (guessNumbers[0] == guessNumbers[1]
-                    || guessNumbers[1] == guessNumbers[2]
-                    || guessNumbers[0] == guessNumbers[2]) {
+            Set<Integer> setGuessNumbers = new HashSet<>(guessNumbers);
+            if (setGuessNumbers.size() < 3) {
                 System.out.println("같은 숫자를 입력하면 안되요~");
-                System.exit(0);
+                guessNumbers.clear();
+
+                continue;
             }
 
             int strikeCount = 0;
             int ballCount = 0;
 
-            for (int i = 0; i < guessNumbers.length; i++) {
-                for (int j = 0; j < guessNumbers.length; j++) {
-                    if (i == j) {
-                        if (numbers[i] == guessNumbers[j]) {
-                            strikeCount = strikeCount + 1;
-                        }
-                    } else if (numbers[i] == guessNumbers[j]) {
-                        ballCount = ballCount + 1;
-                    }
+            for (int i = 0; i < guessNumbers.size(); i++) {
+                if (numbers.get(i) == guessNumbers.get(i)) {
+                    strikeCount += 1;
+                } else if (numbers.contains(guessNumbers.get(i))) {
+                    ballCount += 1;
                 }
             }
 
@@ -56,6 +55,8 @@ public class Baseball {
             System.out.println(strikeCount + "스트라이크");
             System.out.println(ballCount + "볼");
             System.out.println(outCount + "아웃");
+
+            guessNumbers.clear();
         }
     }
 }
