@@ -35,22 +35,16 @@ public class Baseball {
             int strikeCount = 0;
             int ballCount = 0;
 
-            if (numbers[0] == guessNumbers[0]) {
-                strikeCount = strikeCount + 1;
-            } else if (numbers[1] == guessNumbers[0] || numbers[2] == guessNumbers[0]) {
-                ballCount = ballCount + 1;
-            }
-
-            if (numbers[1] == guessNumbers[1]) {
-                strikeCount = strikeCount + 1;
-            } else if (numbers[0] == guessNumbers[1] || numbers[2] == guessNumbers[1]) {
-                ballCount = ballCount + 1;
-            }
-
-            if (numbers[2] == guessNumbers[2]) {
-                strikeCount = strikeCount + 1;
-            } else if (numbers[0] == guessNumbers[2] || numbers[1] == guessNumbers[2]) {
-                ballCount = ballCount + 1;
+            for (int i = 0; i < guessNumbers.length; i++) {
+                for (int j = 0; j < guessNumbers.length; j++) {
+                    if (i == j) {
+                        if (numbers[i] == guessNumbers[j]) {
+                            strikeCount = strikeCount + 1;
+                        }
+                    } else if (numbers[i] == guessNumbers[j]) {
+                        ballCount = ballCount + 1;
+                    }
+                }
             }
 
             if (strikeCount == 3) {
