@@ -10,10 +10,14 @@ public class Baseball {
         System.out.println("==================================");
         System.out.println();
 
-        List<Integer> numbers = new ArrayList<>();
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(6);
+        Random random = new Random();
+        Set<Integer> setNumbers = new HashSet<>();
+        while (setNumbers.size() < 3) {
+            setNumbers.add(random.nextInt((9 - 1) + 1) + 1);  // 1 ~ 9
+        }
+
+        List<Integer> numbers = new ArrayList<>(setNumbers);
+        Collections.shuffle(numbers);
         System.out.println("정답 > " + numbers);
 
         List<Integer> guessNumbers = new ArrayList<>();
